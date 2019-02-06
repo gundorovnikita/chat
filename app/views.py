@@ -13,8 +13,8 @@ def index(request):
 	else:
 		create = send_message()
 
-	if message.count() == 10:
-			message[0].delete()
+#	if message.count() > 9:
+#			message[0].delete()
 	context = {
 		'message':message,
 		'create':create,

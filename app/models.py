@@ -1,10 +1,17 @@
 from django.db import models
 
 # Create your models here.
+def validate(obj):
+	message = Message.objects.all()
+	if message.count() > 9:
+		message[0].delete()
+
 class Message(models.Model):
 	content = models.CharField(max_length = 250)
+	
+	def clean(self):
+		validate(self)
 
-#	def save(self):
-#		model = Message.objects.all()
-#		if model.count() == 4:
-#			model[1].delete()
+	def __str__(self):
+		return self.content
+
