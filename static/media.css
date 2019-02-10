@@ -1,0 +1,17 @@
+body{
+	background-color: #70a6ff;
+}
+.content{
+	margin: 0 auto;
+	background-color: white;
+	width: 600px;
+	overflow-x:hidden;
+	margin-top: 300px;
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.chat{
+	max-width: 200px;
+	margin: 3px;
+}
+

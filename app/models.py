@@ -8,7 +8,7 @@ def validate(obj):
 
 class Message(models.Model):
 	content = models.CharField(max_length = 250)
-	
+
 	def clean(self):
 		validate(self)
 

@@ -1,18 +1,27 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<link rel="stylesheet" href="{% static 'media.css' %}">
 </head>
 <body>
-	{% for message in message %}
-		{{message.content}}
-		<br>
-	{% endfor %}
-	<form method="post">
-		{% csrf_token %}
-		{{create.as_p}}
-		<button type="submit">Отправить</button>
-	</form>
+	<div class="content">
+		<div class="chat">
+			{% for message in message %}
+				{{message.id}} : {{message.content}}
+				<br>
+			{% endfor %}
+		</div>
+		<div class="input">
+			<form method="post">
+				Твой id:{{message_id}}
+				{% csrf_token %}
+				{{create.content}}
+				<button type="submit">Отправить</button>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
