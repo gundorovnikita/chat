@@ -15,13 +15,53 @@
 			{% endfor %}
 		</div>
 		<div class="input">
-			<form method="post">
+			<form method="post" id="form">
 				Твой id:{{message_id}}
 				{% csrf_token %}
 				{{create.content}}
 				<button type="submit">Отправить</button>
 			</form>
+			<div id="message">
+				
+			</div>
 		</div>
 	</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+var socket_url = 'ws://' + window.location.host + window.location.pathname		
+var socket = new WebSocket(socket_url)
+
+//var chatHolder = $("#message")
+
+socket.onopen = function(event){
+	console.log(event)
+	var form = $('#form')
+	form.submit(function(e){
+		e.preventDefault()
+		var message_text = $('#id_content').val()
+		data = {
+			'message_text':message_text
+		}
+		socket.send(JSON.stringify(data))
+	})
+	
+}
+socket.onmessage = function(event){	
+	console.log(event.data)
+/*
+	console.log(event)
+	chatHolder.append('<p>' + event.data + '</p>')
+*/
+
+	var newMessage = JSON.parse(event.data)
+	$('#message').append('<p>', newMessage.new_message ,'</p>')
+
+}
+
+socket.onclose = function(event){
+	console.log(event)
+}
+
+</script>
 </body>
 </html>

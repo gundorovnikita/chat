@@ -6,7 +6,8 @@ import random
 # Create your views here.
 def index(request):
 	message = Message.objects.all()
-	message_id = message[9].id + 1
+	message_cal = Message.objects.all().order_by('-id')
+	message_id = message_cal[0].id + 1
 	if request.method == 'POST':
 		create = send_message(request.POST)
 		if create.is_valid():
